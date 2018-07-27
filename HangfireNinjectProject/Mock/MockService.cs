@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace HangfireNinjectProject.Mock
@@ -8,9 +8,9 @@ namespace HangfireNinjectProject.Mock
 
 		public void DoSomethingDelayed(MockObject mockObject)
 		{
-			for (var i = 1; i <= 20; i++)
+			for (var i = 1; i <= 60; i++)
 			{
-				Console.WriteLine(Fibonacci(i));
+				Thread.Sleep(100);
 			}
 		}
 
@@ -22,19 +22,6 @@ namespace HangfireNinjectProject.Mock
 					mockObject.FakeNumber = index;
 					DoSomethingDelayed(mockObject);
 				});
-		}
-
-		private static int Fibonacci(int n)
-		{
-			var a = 0;
-			var b = 1;
-			for (var i = 0; i < n; i++)
-			{
-				var temp = a;
-				a = b;
-				b = temp + b;
-			}
-			return a;
 		}
 	}
 }
